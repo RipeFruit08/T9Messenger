@@ -8,6 +8,97 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Top row buttons-->
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock Text="1" FontWeight="Bold" TextWrapping="Wrap"/>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>2<LineBreak/>(A,B,C)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="2" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>3<LineBreak/>(D,E,F)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <!-- Middle row buttons-->
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>4<LineBreak/>(G,H,I)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>5<LineBreak/>(J,K,L)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>6<LineBreak/>(M,N,O)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <!-- Bottom row buttons-->
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>
+                7<LineBreak/>(P,Q,R,S)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>
+                8<LineBreak/>(T,U,V)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.Column="2" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>
+                9<LineBreak/>(W,X,Y,Z)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <!-- Utility row buttons-->
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>
+                *<LineBreak/>(, &lt;)
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>
+                0<LineBreak/>( ~ )
+                </Bold>
+            </TextBlock>
+        </Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Height="140" Margin="10,10,10,0" Width="100">
+            <TextBlock TextWrapping="Wrap">
+                <Bold>
+                #<LineBreak/>(space)
+                </Bold>
+            </TextBlock>
+        </Button>
 
     </Grid>
+
 </Page>
