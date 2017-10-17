@@ -43,20 +43,28 @@ namespace T9Messenger
                     // nothing
                     break;
                 case "2":
+                    do_keypress(2, new char[] { 'A', 'B', 'C' });
                     break;
                 case "3":
+                    do_keypress(3, new char[] { 'D', 'E', 'F' });
                     break;
                 case "4":
+                    do_keypress(4, new char[] { 'G', 'H', 'I' });
                     break;
                 case "5":
+                    do_keypress(5, new char[] { 'J', 'K', 'L' });
                     break;
                 case "6":
+                    do_keypress(6, new char[] { 'M', 'N', 'O' });
                     break;
                 case "7":
+                    do_keypress(7, new char[] { 'P', 'Q', 'R', 'S' });
                     break;
                 case "8":
+                    do_keypress(8, new char[] { 'T', 'U', 'V' });
                     break;
                 case "9":
+                    do_keypress(9, new char[] { 'W', 'X', 'Y', 'Z' });
                     break;
                 case "*":
                     break;
@@ -70,266 +78,29 @@ namespace T9Messenger
             //vm.text = "1";
         }
 
-        private void Button_Click2(object sender, RoutedEventArgs e)
+        private void do_keypress(int keyCode, char[] chars)
         {
             // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 2 )
+            if((DateTime.Now-vm.lastPress).Seconds < 1 && vm.keyCode == keyCode)
             {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
+                char lastch = vm.text[vm.text.Length - 1];
+                for ( int i = 0; i < chars.Length; i++)
                 {
-                    case 'A':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "B";
+                    if (lastch == chars[i])
+                    {
+                        int idx = (i < chars.Length - 1) ? i+1 : 0;
+                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + chars[idx];
                         break;
-                    case 'B':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "C";
-                        break;
-                    case 'C':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "A";
-                        break;
-                    default:
-                        break;
+                    }
                 }
             }
-
-            // add new letter 
             else
             {
-                vm.text += "A";
+                vm.text += chars[0];
             }
 
             vm.lastPress = DateTime.Now;
-            vm.keyCode = 2;
-        }
-        
-        private void Button_Click3(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 3)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'D':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "E";
-                        break;
-                    case 'E':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "F";
-                        break;
-                    case 'F':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "D";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "D";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 3;
-        }
-
-        private void Button_Click4(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 4)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'G':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "H";
-                        break;
-                    case 'H':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "I";
-                        break;
-                    case 'I':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "G";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "G";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 4;
-        }
-
-        private void Button_Click5(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 5)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'J':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "K";
-                        break;
-                    case 'K':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "L";
-                        break;
-                    case 'L':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "J";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "J";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 5;
-        }
-
-        private void Button_Click6(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 6)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'M':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "N";
-                        break;
-                    case 'N':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "O";
-                        break;
-                    case 'O':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "M";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "M";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 6;
-        }
-
-        private void Button_Click7(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 7)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'P':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "Q";
-                        break;
-                    case 'Q':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "R";
-                        break;
-                    case 'R':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "S";
-                        break;
-                    case 'S':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "P";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "P";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 7;
-        }
-
-        private void Button_Click8(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 8)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'T':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "U";
-                        break;
-                    case 'U':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "V";
-                        break;
-                    case 'V':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "T";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "T";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 8;
-        }
-
-        private void Button_Click9(object sender, RoutedEventArgs e)
-        {
-            // was less than a second since last keypress 
-            if ( (DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == 9)
-            {
-                var lastch = vm.text[vm.text.Length - 1];
-                switch (lastch)
-                {
-                    case 'W':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "X";
-                        break;
-                    case 'X':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "Y";
-                        break;
-                    case 'Y':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "Z";
-                        break;
-                    case 'Z':
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "W";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            // add new letter 
-            else
-            {
-                vm.text += "W";
-            }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = 9;
+            vm.keyCode = keyCode;
         }
 
         private void Button_ClickSpace(object sender, RoutedEventArgs e)
