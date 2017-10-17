@@ -35,7 +35,66 @@ namespace T9Messenger
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Button was pressed");
-            vm.text = "1";
-        }   
+            var b = sender as Button;
+            var keyCode = b.CommandParameter ?? "-1";
+            switch(keyCode)
+            {
+                case "1":
+                    // nothing
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    break;
+                case "7":
+                    break;
+                case "8":
+                    break;
+                case "9":
+                    break;
+                case "*":
+                    break;
+                case "0":
+                    break;
+                case "#":
+                    break;
+                default:
+                    break;
+            }
+            //vm.text = "1";
+        }
+        
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            if ( vm.text == "" )
+            {
+                vm.text = "A";
+            }
+            else
+            {
+                var lastch = vm.text[vm.text.Length-1];
+                switch (lastch)
+                {
+                    case 'A':
+                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "B";
+                        break;
+                    case 'B':
+                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "C";
+                        break;
+                    case 'C':
+                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + "A";
+                        break;
+                    default:
+                        vm.text += "A";
+                        break;
+                }
+            }
+        }
     }
 }
