@@ -12,6 +12,8 @@ namespace T9Messenger.ViewModel
     public class ViewModel : INotifyPropertyChanged
     {
         private static ViewModel Instance = new ViewModel();
+        public DateTime lastPress { get; set; }
+        public int keyCode { get; set; }
         private string _text;
         public string text
         {
@@ -28,7 +30,10 @@ namespace T9Messenger.ViewModel
 
         private ViewModel()
         {
-            text = "Type some stuff";
+            lastPress = DateTime.Now;
+            //text = "Type some stuff";
+            text = "";
+            keyCode = -1;
         }
 
         public static ViewModel GetViewModel()
