@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,19 @@ namespace T9Messenger
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        public ViewModel.ViewModel vm { get; set; }
+
         public MainPage()
         {
+            vm = ViewModel.ViewModel.GetViewModel();
             this.InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Button was pressed");
+            vm.text = "1";
+        }   
     }
 }
