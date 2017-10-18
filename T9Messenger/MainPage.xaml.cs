@@ -67,27 +67,15 @@ namespace T9Messenger
                     vm.keypress(9);
                     break;
                 case "*":
+                    vm.delete();
                     break;
                 case "0":
                     break;
                 case "#":
+                    vm.space();
                     break;
                 default:
                     break;
-            }
-            //vm.text = "1";
-        }
-
-        private void Button_ClickSpace(object sender, RoutedEventArgs e)
-        {
-            vm.text += " ";
-        }
-
-        private void Button_ClickDel(object sender, RoutedEventArgs e)
-        {
-            if ( vm.text != "")
-            {
-                vm.text = vm.text.Substring(0, vm.text.Length - 1);
             }
         }
     }

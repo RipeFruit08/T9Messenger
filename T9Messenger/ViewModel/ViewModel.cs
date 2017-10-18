@@ -57,6 +57,19 @@ namespace T9Messenger.ViewModel
             }
         }
 
+        public void delete()
+        {
+            if (text != "")
+            {
+                text = text.Substring(0, text.Length - 1);
+            }
+        }
+
+        public void space()
+        {
+            text += " ";
+        }
+
         public void keypress(int keyCode)
         {
             if (!predictive)

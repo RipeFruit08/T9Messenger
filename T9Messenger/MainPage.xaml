@@ -80,7 +80,7 @@
             </TextBlock>
         </Button>
         <!-- Utility row buttons-->
-        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Height="108" Margin="10,10,10,0" Width="100" CommandParameter="*" Click="Button_ClickDel">
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Height="108" Margin="10,10,10,0" Width="100" CommandParameter="*" Click="Button_Click">
             <TextBlock TextWrapping="Wrap">
                 <Bold>
                 *<LineBreak/>(, &lt;)
@@ -94,7 +94,7 @@
                 </Bold>
             </TextBlock>
         </Button>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Height="108" Margin="10,10,10,0" Width="100" CommandParameter="#" Click="Button_ClickSpace">
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Height="108" Margin="10,10,10,0" Width="100" CommandParameter="#" Click="Button_Click">
             <TextBlock TextWrapping="Wrap">
                 <Bold>
                 #<LineBreak/>(space)
