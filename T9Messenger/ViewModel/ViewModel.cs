@@ -70,31 +70,76 @@ namespace T9Messenger.ViewModel
             {
                 text = text.Substring(0, text.Length - 1);
             }
+            // throw away current set of keyCombs and revert back to set prior
+            if (predictive)
+            {
+                if (m.keyCombs.Count > 0)
+                {
+                    var last = m.keyCombs.Last();
+                    // means we just wanna get rid of last element here
+                    if ( last.Count > 0)
+                    {
+                        last.RemoveAt(last.Count-1);
+                        if (last.Count > 0)
+                        {
+                            var ws = possible_valid_words(last);
+                            suggestions = ws;
+                            m.word_cycle = 0;
+                        }
+                        else
+                        {
+                            m.keyCombs.RemoveAt(m.keyCombs.Count - 1);
+                            suggestions = new List<string>();
+                        }
+                    }
+                    else
+                    {
+                        m.keyCombs.RemoveAt(m.keyCombs.Count - 1);
+                        last = m.keyCombs.Last();
+                        var ws = possible_valid_words(last);
+                        suggestions = ws;
+                        m.word_cycle = 0;
+                    }
+                }
+            }
         }
 
         public void space()
         {
             text += " ";
-            m.sug_chosen = false;
+
+            // can only assume that if someone pressed space in predicitive mode
+            // then they want to proceed onto the next word
+            if (predictive)
+            {
+                m.keyCombs.Add(new List<int>());
+                m.sug_chosen = false;
+            }
         }
 
         public void makeChoice()
         {
-            Debug.WriteLine("youve made a choice!");
-            string res;
-            if ( (res = m.suggestion) != "")
+            // button doesnt have well defined functionality unless in predictive mode
+            if (predictive)
             {
-                if (!m.sug_chosen)
+                Debug.WriteLine("youve made a choice!");
+                var res = m.suggestion;
+                text = text.Substring(0, text.Length - res.Length) + res;
+                /*
+                string res;
+                if ((res = m.suggestion) != "")
                 {
-                    text += res;
-                    m.sug_chosen = true;
+                    if (!m.sug_chosen)
+                    {
+                        text += res;
+                        m.sug_chosen = true;
+                    }
+                    else
+                    {
+                        text = text.Substring(0, text.Length - res.Length) + res;
+                    } 
                 }
-                else
-                {
-                    text = text.Substring(0, text.Length - res.Length) + res;
-                }
-                
-                m.keyCombs.Add(new List<int>());
+                */
             }
         }
 
@@ -136,10 +181,6 @@ namespace T9Messenger.ViewModel
                     m.keyCombs.Add(last);
                 }
                 var ws = possible_valid_words(last);
-                foreach (var w in ws)
-                {
-                    Debug.Write(w + " ");
-                }
                 if(ws.Count == 0)
                 {
                     var hyphens = "";
@@ -149,8 +190,17 @@ namespace T9Messenger.ViewModel
                     }
                     ws.Add(hyphens);
                 }
+                else
+                {
+                    var tmp = ws[0];
+                    text = text.Substring(0, text.Length - (tmp.Length - 1)) + tmp;
+                }
                 suggestions = ws;
                 m.word_cycle = 0;
+                foreach (var w in ws)
+                {
+                    Debug.Write(w + " ");
+                }
                 Debug.WriteLine("");
             }
         }
