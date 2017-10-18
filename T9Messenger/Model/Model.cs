@@ -13,6 +13,34 @@ namespace T9Messenger.Model
     {
         public HashSet<string> words;
         public bool predictive { get; set; }
+        public string text { get; set; }
+        public List<List<int>> keyCombs { get; set; }
+        public List<string> possible_words { get; set; }
+        public int word_cycle { get; set; }
+        public string suggestion
+        {
+            get
+            {
+                if (possible_words.Count == 0)
+                {
+                    return ""; // no suggestion
+                }
+                if (word_cycle == possible_words.Count - 1)
+                {
+                    var res = possible_words[word_cycle];
+                    word_cycle = 0;
+                    return res;
+                }
+                else
+                {
+                    return possible_words[word_cycle++];
+                }
+            }
+        }
+        // paired with keyCode, used to determine when and what
+        // the last key that was pressed
+        public DateTime lastPress { get; set; }
+        public int keyCode { get; set; }
 
 
         private void populate_dict()
@@ -29,11 +57,17 @@ namespace T9Messenger.Model
 
         public Model(string fn)
         {
-            predictive = false;
             var p = Directory.GetCurrentDirectory();
-            //var fr = new StreamReader("C:\english-words.txt");
-
             Task.Run(() => populate_dict());
+            predictive = false;
+            text = "";
+            lastPress = DateTime.Now;
+            keyCode = -1;
+            keyCombs = new List<List<int>>();
+            possible_words = new List<string>();
+            //possible_words.Add("hi");
+            //possible_words.Add("hello");
+            word_cycle = 0;
         }
     }
 }

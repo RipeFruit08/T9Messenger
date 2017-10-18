@@ -70,6 +70,7 @@ namespace T9Messenger
                     vm.delete();
                     break;
                 case "0":
+                    vm.makeChoice();
                     break;
                 case "#":
                     vm.space();

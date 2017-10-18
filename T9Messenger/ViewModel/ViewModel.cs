@@ -26,10 +26,17 @@ namespace T9Messenger.ViewModel
             {9, new char[]{'w', 'x', 'y', 'z' } }
         };
         public Model.Model m { get; set; }
-        public DateTime lastPress { get; set; }
-        public int keyCode { get; set; }
-        public List<List<int>> keyCombs { get; set; }
-        public List<string> myStuff { get; set; }
+        public List<string> suggestions {
+            get
+            {
+                return m.possible_words;
+            }
+            set
+            {
+                m.possible_words = value;
+                OnPropertyChanged(nameof(suggestions));
+            }
+        }
 
         public bool predictive
         {
@@ -43,16 +50,16 @@ namespace T9Messenger.ViewModel
                 OnPropertyChanged(nameof(predictive));
             }
         }
-        private string _text;
+
         public string text
         {
             get
             {
-                return _text;
+                return m.text;
             }
             set
             {
-                _text = value;
+                m.text = value;
                 OnPropertyChanged(nameof(text));
             }
         }
@@ -70,13 +77,23 @@ namespace T9Messenger.ViewModel
             text += " ";
         }
 
+        public void makeChoice()
+        {
+            Debug.WriteLine("youve made a choice!");
+            var res = m.suggestion;
+            if ( res != "")
+            {
+                text = res;
+            }
+        }
+
         public void keypress(int keyCode)
         {
             if (!predictive)
             {
                 var chars = keyMap[keyCode];
                 // was less than a second since last keypress 
-                if ((DateTime.Now - lastPress).Seconds < 1 && this.keyCode == keyCode)
+                if ((DateTime.Now - m.lastPress).Seconds < 1 && m.keyCode == keyCode)
                 {
                     char lastch = text[text.Length - 1];
                     for (int i = 0; i < chars.Length; i++)
@@ -95,23 +112,33 @@ namespace T9Messenger.ViewModel
                     text += chars[0];
                 }
 
-                lastPress = DateTime.Now;
-                this.keyCode = keyCode;
+                m.lastPress = DateTime.Now;
+                m.keyCode = keyCode;
             }
             else
             {
-                var last = (keyCombs.Count != 0) ? keyCombs.Last() : new List<int>();
+                var last = (m.keyCombs.Count != 0) ? m.keyCombs.Last() : new List<int>();
                 last.Add(keyCode);
                 // new list, add it
                 if (last.Count == 1)
                 {
-                    keyCombs.Add(last);
+                    m.keyCombs.Add(last);
                 }
                 var ws = possible_valid_words(last);
                 foreach (var w in ws)
                 {
                     Debug.Write(w + " ");
                 }
+                if(ws.Count == 0)
+                {
+                    var hyphens = "";
+                    for ( int i = 0; i < last.Count; i++)
+                    {
+                        hyphens += '-';
+                    }
+                    ws.Add(hyphens);
+                }
+                suggestions = ws;
                 Debug.WriteLine("");
             }
         }
@@ -161,15 +188,8 @@ namespace T9Messenger.ViewModel
 
         private ViewModel()
         {
-            lastPress = DateTime.Now;
             m = new Model.Model("english-word.txt");
-            keyCombs = new List<List<int>>();
-            myStuff = new List<string>();
-            myStuff.Add("hi");
-            myStuff.Add("hello");
             //text = "Type some stuff";
-            text = "";
-            keyCode = -1;
         }
 
         public static ViewModel GetViewModel()
