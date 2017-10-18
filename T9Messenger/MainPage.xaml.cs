@@ -43,28 +43,36 @@ namespace T9Messenger
                     // nothing
                     break;
                 case "2":
-                    do_keypress(2, new char[] { 'A', 'B', 'C' });
+                    //do_keypress(2, new char[] { 'A', 'B', 'C' });
+                    vm.keypress(2);
                     break;
                 case "3":
-                    do_keypress(3, new char[] { 'D', 'E', 'F' });
+                    //do_keypress(3, new char[] { 'D', 'E', 'F' });
+                    vm.keypress(3);
                     break;
                 case "4":
-                    do_keypress(4, new char[] { 'G', 'H', 'I' });
+                    //do_keypress(4, new char[] { 'G', 'H', 'I' });
+                    vm.keypress(4);
                     break;
                 case "5":
-                    do_keypress(5, new char[] { 'J', 'K', 'L' });
+                    //do_keypress(5, new char[] { 'J', 'K', 'L' });
+                    vm.keypress(5);
                     break;
                 case "6":
-                    do_keypress(6, new char[] { 'M', 'N', 'O' });
+                    //do_keypress(6, new char[] { 'M', 'N', 'O' });
+                    vm.keypress(6);
                     break;
                 case "7":
-                    do_keypress(7, new char[] { 'P', 'Q', 'R', 'S' });
+                    //do_keypress(7, new char[] { 'P', 'Q', 'R', 'S' });
+                    vm.keypress(7);
                     break;
                 case "8":
-                    do_keypress(8, new char[] { 'T', 'U', 'V' });
+                    //do_keypress(8, new char[] { 'T', 'U', 'V' });
+                    vm.keypress(8);
                     break;
                 case "9":
-                    do_keypress(9, new char[] { 'W', 'X', 'Y', 'Z' });
+                    //do_keypress(9, new char[] { 'W', 'X', 'Y', 'Z' });
+                    vm.keypress(9);
                     break;
                 case "*":
                     break;
