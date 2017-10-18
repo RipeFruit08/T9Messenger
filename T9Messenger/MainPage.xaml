@@ -101,9 +101,10 @@
             </TextBlock>
         </Button>
         <!-- Text row -->
-        <CheckBox x:Name="termsOfServiceCheckBox" Grid.Row="4" Grid.Column="0"
+        <CheckBox Grid.Row="4" Grid.Column="0" IsChecked="{Binding predictive, Mode=TwoWay}"
           Content="Predictive mode"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding text, Mode=OneWay}" Grid.ColumnSpan="2"></TextBox>
+        <!-- <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding text, Mode=OneWay}" Grid.ColumnSpan="2"></TextBox> -->
+        <AutoSuggestBox Grid.Column="1" Grid.Row="4" Text="{Binding text, Mode=OneWay}" QueryIcon="Find" Grid.ColumnSpan="2" Margin="0,41,10,0"/>
     </Grid>
 
 </Page>

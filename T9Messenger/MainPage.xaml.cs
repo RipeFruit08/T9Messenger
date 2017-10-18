@@ -80,27 +80,47 @@ namespace T9Messenger
 
         private void do_keypress(int keyCode, char[] chars)
         {
-            // was less than a second since last keypress 
-            if((DateTime.Now-vm.lastPress).Seconds < 1 && vm.keyCode == keyCode)
+            if (!vm.predictive)
             {
-                char lastch = vm.text[vm.text.Length - 1];
-                for ( int i = 0; i < chars.Length; i++)
+                // was less than a second since last keypress 
+                if ((DateTime.Now - vm.lastPress).Seconds < 1 && vm.keyCode == keyCode)
                 {
-                    if (lastch == chars[i])
+                    char lastch = vm.text[vm.text.Length - 1];
+                    for (int i = 0; i < chars.Length; i++)
                     {
-                        int idx = (i < chars.Length - 1) ? i+1 : 0;
-                        vm.text = vm.text.Substring(0, vm.text.Length - 1) + chars[idx];
-                        break;
+                        if (lastch == chars[i])
+                        {
+                            int idx = (i < chars.Length - 1) ? i + 1 : 0;
+                            vm.text = vm.text.Substring(0, vm.text.Length - 1) + chars[idx];
+                            break;
+                        }
                     }
                 }
+                // add new letter to text 
+                else
+                {
+                    vm.text += chars[0];
+                }
+
+                vm.lastPress = DateTime.Now;
+                vm.keyCode = keyCode;
             }
             else
             {
-                vm.text += chars[0];
+                var last = (vm.keyCombs.Count != 0) ? vm.keyCombs.Last() : new List<int>();
+                last.Add(keyCode);
+                // new list, add it
+                if(last.Count == 1)
+                {
+                    vm.keyCombs.Add(last);
+                }
+                var ws = possible_valid_words(last);
+                foreach ( var w in ws)
+                {
+                    Debug.Write(w + " ");
+                }
+                Debug.WriteLine("");
             }
-
-            vm.lastPress = DateTime.Now;
-            vm.keyCode = keyCode;
         }
 
         private void Button_ClickSpace(object sender, RoutedEventArgs e)
@@ -114,6 +134,49 @@ namespace T9Messenger
             {
                 vm.text = vm.text.Substring(0, vm.text.Length - 1);
             }
+        }
+
+        private List<string> possible_words(IEnumerable<int> comb)
+        {
+            var letters = ViewModel.ViewModel.keyMap[comb.ElementAt(0)];
+            List<string> words = new List<string>();
+            if (comb.Count() == 1)
+            {
+                foreach(var c in letters)
+                {
+                    words.Add(c.ToString());
+                }
+                return words;
+            }
+            else
+            {
+                foreach (var c in letters)
+                {
+                    var tail = comb.Skip(1);
+                    var sub_words = possible_words(tail);
+                    foreach( var w in sub_words )
+                    {
+                        words.Add(c + w);   
+                    }
+
+                }
+            }
+            //List<string> words = new List<string>();
+            return words;
+        }
+
+        private List<string> possible_valid_words(IEnumerable<int> comb)
+        {
+            List<string> valid_words = new List<string>();
+            var words = possible_words(comb);
+            foreach ( var w in words)
+            {
+                if ( vm.m.words.Contains(w))
+                {
+                    valid_words.Add(w);
+                }
+            }
+            return valid_words;
         }
     }
 }
