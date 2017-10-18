@@ -75,15 +75,26 @@ namespace T9Messenger.ViewModel
         public void space()
         {
             text += " ";
+            m.sug_chosen = false;
         }
 
         public void makeChoice()
         {
             Debug.WriteLine("youve made a choice!");
-            var res = m.suggestion;
-            if ( res != "")
+            string res;
+            if ( (res = m.suggestion) != "")
             {
-                text = res;
+                if (!m.sug_chosen)
+                {
+                    text += res;
+                    m.sug_chosen = true;
+                }
+                else
+                {
+                    text = text.Substring(0, text.Length - res.Length) + res;
+                }
+                
+                m.keyCombs.Add(new List<int>());
             }
         }
 
@@ -139,6 +150,7 @@ namespace T9Messenger.ViewModel
                     ws.Add(hyphens);
                 }
                 suggestions = ws;
+                m.word_cycle = 0;
                 Debug.WriteLine("");
             }
         }

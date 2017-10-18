@@ -17,6 +17,7 @@ namespace T9Messenger.Model
         public List<List<int>> keyCombs { get; set; }
         public List<string> possible_words { get; set; }
         public int word_cycle { get; set; }
+        public bool sug_chosen { get; set; }
         public string suggestion
         {
             get
@@ -68,6 +69,7 @@ namespace T9Messenger.Model
             //possible_words.Add("hi");
             //possible_words.Add("hello");
             word_cycle = 0;
+            sug_chosen = false;
         }
     }
 }
